@@ -13,7 +13,7 @@ const CREATE3_DEFAULT_FACTORY: [u8; 20] = [
 ];
 
 fn main() {
-    let (address, salt, zero_count) = match Maldon::parse() {
+    match Maldon::parse() {
         Maldon::Create3 { deployer, factory, zero_count } => {
             let factory = if let Some(factory) = factory {
                 factory
@@ -24,6 +24,4 @@ fn main() {
             Create3Miner::new(factory, deployer).mine(zero_count)
         }
     };
-
-    println!("Found salt {salt:?} ==> {address:?} with {zero_count} zero bytes.");
 }
